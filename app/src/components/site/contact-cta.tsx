@@ -12,14 +12,7 @@ export function ContactCta() {
           <h2 className="m3d-final__title">Máš nápad? Poďme ho vytlačiť.</h2>
         </Reveal>
         <Reveal>
-          <div className="m3d-cta-row">
-            <a className="m3d-btn-primary" href="mailto:m3d.prints.ofc@gmail.com">
-              Chcem vytlačiť produkt
-            </a>
-            <a className="m3d-btn-secondary" href="mailto:m3d.prints.ofc@gmail.com">
-              Chcem navrhnúť produkt
-            </a>
-          </div>
+          <p className="m3d-final__subtext">Napíš mi na email alebo Instagram.</p>
         </Reveal>
         <Reveal>
           <div className="m3d-final__contacts">
