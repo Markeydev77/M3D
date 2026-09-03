@@ -23,6 +23,8 @@
 @import "tw-animate-css";
 /* shadcn v4 base (scrollbar/scroll-fade utilities, toast base) for src/components/ui */
 @import "shadcn/tailwind.css";
+/* Markey 3D site brand layer — unlayered on purpose, see file header. */
+@import "./styles/site.css";
 
 @custom-variant dark (&:where([data-theme="default-dark"], [data-theme="default-dark"] *));
 

@@ -1,8 +1,8 @@
 {
-  "og_title": null,
-  "og_description": null,
-  "og_image_url": null,
-  "favicon_url": null,
+  "og_title": "Markey 3D — Z nápadu až po tlač",
+  "og_description": "3D tlač a návrh produktov na mieru. Pošli model alebo nápad, ja to vytlačím.",
+  "og_image_url": "/assets/og-image.png",
+  "favicon_url": "/favicon-32.png",
   "og_video_url": null,
-  "marketplace_cover_url": null
+  "marketplace_cover_url": "/assets/og-image.png"
 }

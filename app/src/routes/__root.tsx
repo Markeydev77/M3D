@@ -8,8 +8,6 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { button } from "@higgsfield/quanta/button";
-import { NotFound } from "@higgsfield/quanta/not-found";
 
 import appCss from "../styles.css?url";
 import { reportHiggsfieldError } from "../lib/higgsfield-error-reporting";
@@ -21,8 +19,8 @@ import appMetaJson from "../app-meta.json";
 declare const __HF_DESIGN_INSPECTOR__: boolean;
 
 // Built-in defaults for any field that isn't set in app-meta.json.
-const DEFAULT_TITLE = "Higgsfield App";
-const DEFAULT_DESCRIPTION = "Higgsfield Generated Project";
+const DEFAULT_TITLE = "Markey 3D — Z nápadu až po tlač";
+const DEFAULT_DESCRIPTION = "3D tlač a návrh produktov na mieru. Pošli model alebo nápad, ja to vytlačím.";
 
 type AppMeta = {
   og_title?: string | null;
@@ -97,25 +95,34 @@ function buildHead(meta: AppMeta) {
       ...(ogVideo ? [{ property: "og:video", content: ogVideo }] : []),
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
-      ...(favicon ? [{ rel: "icon", href: favicon }] : []),
+      { rel: "preconnect" as const, href: "https://fonts.googleapis.com" },
+      {
+        rel: "preconnect" as const,
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous" as const,
+      },
+      {
+        rel: "stylesheet" as const,
+        href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap",
+      },
+      { rel: "stylesheet" as const, href: appCss },
+      { rel: "manifest" as const, href: "/site.webmanifest" },
+      { rel: "apple-touch-icon" as const, href: "/apple-touch-icon.png" },
+      { rel: "icon" as const, href: "/favicon-32.png", sizes: "32x32" },
+      { rel: "icon" as const, href: "/favicon-16.png", sizes: "16x16" },
+      ...(favicon ? [{ rel: "icon" as const, href: favicon }] : []),
     ],
   };
 }
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-q-background-primary px-4">
-      <NotFound
-        className="mx-auto max-w-md"
-        icon={<span className="text-q-title-md-semi-bold text-q-text-primary">404</span>}
-        title="Page not found"
-        subtitle="The page you're looking for doesn't exist or has been moved."
-      >
-        <Link to="/" className={button({ variant: "primary", size: "md" }, "mt-3")}>
-          Go home
-        </Link>
-      </NotFound>
+    <div className="m3d-body flex min-h-dvh flex-col items-center justify-center gap-4 px-4 text-center">
+      <p className="m3d-kicker">404</p>
+      <h1 className="m3d-final__title">Táto stránka neexistuje.</h1>
+      <Link className="m3d-btn-primary" to="/">
+        Späť domov
+      </Link>
     </div>
   );
 }
@@ -128,26 +135,23 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-q-background-primary px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-q-title-lg-semi-bold text-q-text-primary">This page didn't load</h1>
-        <p className="mt-2 text-q-body-sm-regular text-q-text-secondary">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className={button({ variant: "primary", size: "md" })}
-          >
-            Try again
-          </button>
-          <a href="/" className={button({ variant: "outline", size: "md" })}>
-            Go home
-          </a>
-        </div>
+    <div className="m3d-body flex min-h-dvh flex-col items-center justify-center gap-4 px-4 text-center">
+      <h1 className="m3d-final__title">Niečo sa pokazilo.</h1>
+      <p style={{ color: "var(--m3d-muted)" }}>Skús to znova alebo sa vráť na úvod.</p>
+      <div className="m3d-cta-row">
+        <button
+          className="m3d-btn-primary"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          type="button"
+        >
+          Skúsiť znova
+        </button>
+        <a className="m3d-btn-secondary" href="/">
+          Späť domov
+        </a>
       </div>
     </div>
   );
@@ -164,14 +168,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" data-theme="default-dark" style={{ colorScheme: "dark" }}>
-      {/* Marketplace apps are permanently dark: data-theme is pinned on <html>
-          above. Do not add quanta's bootstrapScript/ThemeController, a theme
-          toggle, or a light mode. */}
+    <html lang="sk" style={{ colorScheme: "dark" }}>
       <head>
         <HeadContent />
       </head>
-      <body className="bg-q-background-primary text-q-text-primary">
+      <body className="m3d-body">
         {children}
         <Scripts />
       </body>

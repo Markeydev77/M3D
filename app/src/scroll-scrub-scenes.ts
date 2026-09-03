@@ -1,41 +1,37 @@
 /**
- * Scene data for the scroll-scrub journey — THE file you fill in per build.
+ * Scene data for the scroll-scrub journey.
  *
- * Single-shot (the default): ONE entry in `scenes`, whose `clip` is the single
- * continuous film. Chapter copy still comes from `chapters` below, rendered as
- * semantic sections over that one clip.
- *
- * Multi-leg (opt-in): one entry per seam-locked leg, in journey order. Every
- * `poster` MUST be the exact first frame of the encoded clip beside it — never
- * a design board or an imagined destination still.
- *
- * Keep this array a module constant. Changing its identity on every render
- * intentionally rebuilds the media controller.
+ * Single-shot: ONE entry in `scenes`, whose `clip` is the single continuous
+ * film (a 4s push-in on the printer). Chapter copy is rendered as semantic
+ * sections over that one clip; scroll distance per chapter is controlled by
+ * `scroll` (viewport-heights), not by clip length.
  */
+import { HeroActions } from "@/components/site/hero-actions";
 import type {
   ScrollScrubScene,
   ScrollScrubTheme,
 } from "@/components/scroll-scrub/scroll-scrub";
 
-/** Brand tokens for the journey layer. Set these from the design brief. */
 export const scrollScrubTheme: ScrollScrubTheme = {
-  accent: "<accent hex>",
-  background: "<background hex>",
-  ink: "<ink hex>",
-  muted: "<muted ink hex>",
+  accent: "#8b5cf6",
+  background: "#050505",
+  ink: "#f4f2f7",
+  muted: "#9a97a3",
 };
 
 export const scrollScrubScenes: ScrollScrubScene[] = [
   {
-    body: "<one sentence that earns the next scroll>",
-    clip: "/assets/world/scene-01.mp4",
     id: "scene-01",
-    kicker: "<kicker>",
-    label: "<nav label>",
-    mobileClip: "/assets/world/scene-01-mobile.mp4",
-    mobilePoster: "/assets/world/scene-01-mobile-poster.png",
+    label: "Úvod",
     poster: "/assets/world/scene-01-poster.png",
-    tags: ["<proof tag>"],
-    title: "<scene headline>",
+    mobilePoster: "/assets/world/scene-01-mobile-poster.png",
+    clip: "/assets/world/scene-01.mp4",
+    mobileClip: "/assets/world/scene-01-mobile.mp4",
+    kicker: "MARKEY 3D",
+    title: "Z nápadu až po tlač.",
+    body: "Navrhnem alebo vytlačím produkt presne podľa toho, čo potrebuješ.",
+    scroll: 1.4,
+    linger: 0.15,
+    actions: HeroActions(),
   },
 ];
